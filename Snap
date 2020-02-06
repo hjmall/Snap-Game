@@ -19,17 +19,19 @@ unused_cards_ = [2, 3, 4, 5, 6, 7,\
 used_cards = []
 
 print('This is a game of snap!\n')
-print("\nPress Ctrl + C to snap!")
+print("\nPress Ctrl + C to snap when two of the same cards are dealt in a row.")
 
 
 def cards():
-	"""Initiates the card dealing and creates the used_cards list used by the key functions. Snaps are evaluated using the used_cards list. used_cards is populated with cards taken from unused_cards which represents a whole deck of cards. Cards are then removed from unused_cards to avoid dealing the same card twice"""
+	"""Initiates the card dealing and creates the used_cards list used by the key functions.
+        Snaps are evaluated using the used_cards list. used_cards is populated with cards taken from unused_cards
+        which represents a whole deck of cards. Cards are then removed from unused_cards to avoid dealing the same card twice"""
 	for card in range(52):
 		card = random.choice(unused_cards_.copy())
 		used_cards.append(card)
 		unused_cards_.remove(card)
 		print(card)
-		sleep(0.8)
+		sleep(0.01)
 		computer_snap()
 	if IndexError:
 		print('\nCards did not generate a snap.\nTry again!')
