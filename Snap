@@ -1,0 +1,90 @@
+import random
+from time import sleep
+import sys
+
+
+unused_cards_ = [2, 3, 4, 5, 6, 7,\
+                8, 9, 10, 'Jack', 'Queen',\
+                'King', 'Ace',\
+                2, 3, 4, 5, 6, 7,\
+                8, 9, 10, 'Jack', 'Queen',\
+                'King', 'Ace',\
+                2, 3, 4, 5, 6, 7,\
+                8, 9, 10, 'Jack', 'Queen',\
+                'King', 'Ace',\
+                2, 3, 4, 5, 6, 7,\
+                8, 9, 10, 'Jack', 'Queen',\
+                'King', 'Ace']
+
+used_cards = []
+
+print('This is a game of snap!\n')
+print("\nPress Ctrl + C to snap!")
+
+
+def cards():
+	"""Initiates the card dealing and creates the used_cards list used by the key functions. Snaps are evaluated using the used_cards list. used_cards is populated with cards taken from unused_cards which represents a whole deck of cards. Cards are then removed from unused_cards to avoid dealing the same card twice"""
+	for card in range(52):
+		card = random.choice(unused_cards_.copy())
+		used_cards.append(card)
+		unused_cards_.remove(card)
+		print(card)
+		sleep(0.8)
+		computer_snap()
+	if IndexError:
+		print('\nCards did not generate a snap.\nTry again!')
+		restart_game()
+
+
+def computer_snap():
+	"""Computer detects when the cards make a snap"""
+	for i, k in enumerate(used_cards[:-1]):
+		
+		if k == used_cards[i+1]:
+			# This line compares i to k
+			print('Computer snaps!\nGame over!\nPlay again?')
+			restart_game()
+			sys.exit()
+			
+
+def user_snap():
+	"""Allows the user to snap"""
+	for i, k in enumerate(used_cards[:-1]):
+		if k == used_cards[i+1]:
+			print('Valid snap! You win!\nPlay again?')
+			restart_game()
+			break
+	else:
+		print('Cards do not match! Game over!\nPlay again?')
+		restart_game()
+		sys.exit()
+
+		
+def starting_condition():
+	"""Specifies the conditions needed to start the program"""
+	start_command = ' '
+	while True:
+		print("\nPress 't' and Enter to begin...")
+		start_command = input()
+		if start_command == 't':
+			try:
+				cards()
+			except KeyboardInterrupt:
+				user_snap()
+				raise
+
+
+def restart_game():
+	"""Allows the game to be re-played if the input is correct"""
+	
+	unused_cards_.extend(used_cards)
+	
+	used_cards.clear()
+	try:
+		starting_condition()
+	except KeyboardInterrupt:
+		print('\nThanks for playing')
+		sys.exit()
+	
+
+starting_condition()
