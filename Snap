@@ -31,7 +31,7 @@ def cards():
 		used_cards.append(card)
 		unused_cards_.remove(card)
 		print(card)
-		sleep(0.01)
+		sleep(0.8)
 		computer_snap()
 	if IndexError:
 		print('\nCards did not generate a snap.\nTry again!')
